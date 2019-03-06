@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201903062007546_TrashCollectorEmployee.Designer.cs">
       <DependentUpon>201903062007546_TrashCollectorEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903062226280_RolesMigration.cs" />
+    <Compile Include="Migrations\201903062226280_RolesMigration.Designer.cs">
+      <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -270,6 +274,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903062007546_TrashCollectorEmployee.resx">
       <DependentUpon>201903062007546_TrashCollectorEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903062226280_RolesMigration.resx">
+      <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
