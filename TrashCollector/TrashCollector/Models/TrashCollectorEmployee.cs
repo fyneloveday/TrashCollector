@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class Employee
+    public class TrashCollectorEmployee
     {
     }
 }
