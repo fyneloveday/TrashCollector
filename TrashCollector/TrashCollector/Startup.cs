@@ -9,6 +9,14 @@ namespace TrashCollector
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            createRolesandUsers();
+        }
+
+        private void createRolesandUsers()
+        {
+            ApplicationDbContext context = new PplicationDbContext();
+
+            var roleManager = new Role Manager<IdentityRole
         }
     }
 }
