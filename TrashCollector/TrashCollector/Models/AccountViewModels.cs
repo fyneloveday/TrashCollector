@@ -50,9 +50,8 @@ namespace TrashCollector.Models
     {
         [Required]
         [Display(Name = "UserName")]
-        [EmailAddress]
+        
         public string UserName { get; set; }
-
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
