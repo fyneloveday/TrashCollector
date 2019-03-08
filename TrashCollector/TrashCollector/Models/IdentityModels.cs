@@ -20,6 +20,9 @@ namespace TrashCollector.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Employee> Employees;
+        public DbSet<Customer> Customers;
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -29,5 +32,9 @@ namespace TrashCollector.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<TrashCollector.Models.TrashCollectorEmployee> TrashCollectorEmployees { get; set; }
+
+        public System.Data.Entity.DbSet<TrashCollector.Models.TrashCollectorCustomer> TrashCollectorCustomers { get; set; }
     }
 }

@@ -178,6 +178,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrashCollectorController.cs" />
+    <Compile Include="Controllers\TrashCollectorCustomersController.cs" />
+    <Compile Include="Controllers\TrashCollectorEmployeesController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +191,10 @@
     <Compile Include="Migrations\201903062226280_RolesMigration.cs" />
     <Compile Include="Migrations\201903062226280_RolesMigration.Designer.cs">
       <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903072317366_RollsMade.cs" />
+    <Compile Include="Migrations\201903072317366_RollsMade.Designer.cs">
+      <DependentUpon>201903072317366_RollsMade.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -257,10 +263,20 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
     <Content Include="Views\Role\View.cshtml" />
+    <Content Include="Views\TrashCollector\EmployeeCreate.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\Create.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\Delete.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\Details.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\Edit.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\Index.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Create.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Delete.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Details.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\TrashCollector\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -281,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903062226280_RolesMigration.resx">
       <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903072317366_RollsMade.resx">
+      <DependentUpon>201903072317366_RollsMade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
