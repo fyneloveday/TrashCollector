@@ -52,10 +52,13 @@ namespace TrashCollector.Controllers
             {
                 db.TrashCollectorEmployees.Add(trashCollectorEmployee);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            return View(trashCollectorEmployee);
+            else
+            {
+                return View(trashCollectorEmployee);
+            }
         }
 
         // GET: TrashCollectorEmployees/Edit/5
