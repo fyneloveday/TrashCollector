@@ -184,17 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903062007546_TrashCollectorEmployee.cs" />
-    <Compile Include="Migrations\201903062007546_TrashCollectorEmployee.Designer.cs">
-      <DependentUpon>201903062007546_TrashCollectorEmployee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903062226280_RolesMigration.cs" />
-    <Compile Include="Migrations\201903062226280_RolesMigration.Designer.cs">
-      <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903072317366_RollsMade.cs" />
-    <Compile Include="Migrations\201903072317366_RollsMade.Designer.cs">
-      <DependentUpon>201903072317366_RollsMade.cs</DependentUpon>
+    <Compile Include="Migrations\201903081758392_FirstMigration.cs" />
+    <Compile Include="Migrations\201903081758392_FirstMigration.Designer.cs">
+      <DependentUpon>201903081758392_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -292,14 +284,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903062007546_TrashCollectorEmployee.resx">
-      <DependentUpon>201903062007546_TrashCollectorEmployee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903062226280_RolesMigration.resx">
-      <DependentUpon>201903062226280_RolesMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903072317366_RollsMade.resx">
-      <DependentUpon>201903072317366_RollsMade.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903081758392_FirstMigration.resx">
+      <DependentUpon>201903081758392_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

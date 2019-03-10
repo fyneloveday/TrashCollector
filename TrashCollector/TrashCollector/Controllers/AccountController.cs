@@ -173,6 +173,7 @@ namespace TrashCollector.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
             return View(model);
         }
 

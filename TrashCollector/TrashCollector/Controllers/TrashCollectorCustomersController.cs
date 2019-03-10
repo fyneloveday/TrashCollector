@@ -38,6 +38,7 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorCustomers/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -52,10 +53,14 @@ namespace TrashCollector.Controllers
             {
                 db.TrashCollectorCustomers.Add(trashCollectorCustomer);
                 db.SaveChanges();
+    
                 return RedirectToAction("Index");
             }
-
-            return View(trashCollectorCustomer);
+            else
+            {
+                return View(trashCollectorCustomer);
+            }
+                        
         }
 
         // GET: TrashCollectorCustomers/Edit/5
