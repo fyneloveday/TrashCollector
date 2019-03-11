@@ -15,9 +15,9 @@ namespace TrashCollector.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TrashCollectorEmployees
-        public ActionResult Index()
+        public ActionResult Index(TrashCollectorCustomer trashCollectorCustomer)
         {
-            return View(db.TrashCollectorEmployees.ToList());
+            return View(db.TrashCollectorCustomers.ToList());
         }
 
         // GET: TrashCollectorEmployees/Details/5
@@ -53,7 +53,7 @@ namespace TrashCollector.Controllers
                 db.TrashCollectorEmployees.Add(trashCollectorEmployee);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             else
             {

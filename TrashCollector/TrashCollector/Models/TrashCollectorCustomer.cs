@@ -15,5 +15,6 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         public string City { get; set; }
         public int ZipCode { get; set; }
+        public double Bill { get; set; }
     }
 }
