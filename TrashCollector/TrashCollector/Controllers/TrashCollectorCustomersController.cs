@@ -32,6 +32,14 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.PickupDay = new List<SelectListItem>()
+            {
+                new SelectListItem(){ Value="Monday", Text = "Monday"},
+                new SelectListItem(){ Value="Tuesday", Text = "Tuesday"},
+                new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
+                new SelectListItem(){ Value="Thursday", Text = "Thursday"},
+                new SelectListItem(){ Value="Friday", Text = "Friday"}
+            };
             return View(trashCollectorCustomer);
         }
 
@@ -54,7 +62,7 @@ namespace TrashCollector.Controllers
                 db.TrashCollectorCustomers.Add(trashCollectorCustomer);
                 db.SaveChanges();
     
-                return RedirectToAction("Index");
+                return RedirectToAction("Index, TrashCollectorCustomers");
             }
             else
             {
@@ -62,6 +70,21 @@ namespace TrashCollector.Controllers
             }
                         
         }
+
+        public ActionResult CreatePickup()
+        {
+            ViewBag.PickupDay = new List<SelectListItem>()
+            {
+                new SelectListItem(){ Value="Monday", Text = "Monday"},
+                new SelectListItem(){ Value="Tuesday", Text = "Tuesday"},
+                new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
+                new SelectListItem(){ Value="Thursday", Text = "Thursday"},
+                new SelectListItem(){ Value="Friday", Text = "Friday"}
+            };
+            return View();
+        }
+
+
 
         // GET: TrashCollectorCustomers/Edit/5
         public ActionResult Edit(int? id)
