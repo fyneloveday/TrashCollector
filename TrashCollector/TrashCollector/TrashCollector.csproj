@@ -177,7 +177,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\TrashCollectorController.cs" />
     <Compile Include="Controllers\TrashCollectorCustomersController.cs" />
     <Compile Include="Controllers\TrashCollectorEmployeesController.cs" />
     <Compile Include="Controllers\usersController.cs" />
@@ -191,6 +190,26 @@
     <Compile Include="Migrations\201903111442198_AddedBillProperty.cs" />
     <Compile Include="Migrations\201903111442198_AddedBillProperty.Designer.cs">
       <DependentUpon>201903111442198_AddedBillProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903120137284_AspUser to Employee.cs" />
+    <Compile Include="Migrations\201903120137284_AspUser to Employee.Designer.cs">
+      <DependentUpon>201903120137284_AspUser to Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903120154229_AspUser show type.cs" />
+    <Compile Include="Migrations\201903120154229_AspUser show type.Designer.cs">
+      <DependentUpon>201903120154229_AspUser show type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903120209556_Added ZipCode To Employee Control.cs" />
+    <Compile Include="Migrations\201903120209556_Added ZipCode To Employee Control.Designer.cs">
+      <DependentUpon>201903120209556_Added ZipCode To Employee Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903120246279_Added IEnurable for zipselect.cs" />
+    <Compile Include="Migrations\201903120246279_Added IEnurable for zipselect.Designer.cs">
+      <DependentUpon>201903120246279_Added IEnurable for zipselect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903120316043_Added customer asp.user.cs" />
+    <Compile Include="Migrations\201903120316043_Added customer asp.user.Designer.cs">
+      <DependentUpon>201903120316043_Added customer asp.user.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -297,6 +316,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903111442198_AddedBillProperty.resx">
       <DependentUpon>201903111442198_AddedBillProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120137284_AspUser to Employee.resx">
+      <DependentUpon>201903120137284_AspUser to Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120154229_AspUser show type.resx">
+      <DependentUpon>201903120154229_AspUser show type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120209556_Added ZipCode To Employee Control.resx">
+      <DependentUpon>201903120209556_Added ZipCode To Employee Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120246279_Added IEnurable for zipselect.resx">
+      <DependentUpon>201903120246279_Added IEnurable for zipselect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120316043_Added customer asp.user.resx">
+      <DependentUpon>201903120316043_Added customer asp.user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

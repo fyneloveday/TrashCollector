@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,12 @@ namespace TrashCollector.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TrashCollectorEmployees
-        public ActionResult Index(TrashCollectorCustomer trashCollectorCustomer)
+        public ActionResult Index()
         {
-            return View(db.TrashCollectorCustomers.ToList());
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
+            var customersFromZip = db.TrashCollectorCustomers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+            return View(customersFromZip);
         }
 
         // GET: TrashCollectorEmployees/Details/5
@@ -38,7 +42,11 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorEmployees/Create
         public ActionResult Create()
         {
-            return View();
+            var selectedZip = db.TrashCollectorCustomers.Select(c => c.ZipCode).ToList();
+            TrashCollectorEmployee Employee = new TrashCollectorEmployee();
+         
+            Employee.ZipCodeSelected = selectedZip;
+            return View(Employee);
         }
 
         // POST: TrashCollectorEmployees/Create
@@ -46,19 +54,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName")] TrashCollectorEmployee trashCollectorEmployee)
+        public ActionResult Create(TrashCollectorEmployee trashCollectorEmployee)
         {
-            if (ModelState.IsValid)
-            {
+           
+                string getAspUser = User.Identity.GetUserId();
+                trashCollectorEmployee.AspUserId = getAspUser;
                 db.TrashCollectorEmployees.Add(trashCollectorEmployee);
                 db.SaveChanges();
 
-                return RedirectToAction("Details");
-            }
-            else
-            {
-                return View(trashCollectorEmployee);
-            }
+                return RedirectToAction("Index");
+        
         }
 
         // GET: TrashCollectorEmployees/Edit/5

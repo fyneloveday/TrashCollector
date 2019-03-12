@@ -52,6 +52,15 @@
         </div>
 
         <div class="form-group">
+            @Html.Label("Backup Pickup Day", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("Name")*@
+                @Html.DropDownList("BackupPickupDay", (IEnumerable<SelectListItem>)ViewBag.PickupDay, null, new { @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

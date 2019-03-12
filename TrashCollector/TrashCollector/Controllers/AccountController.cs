@@ -155,7 +155,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserRole = model.UserRoles };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -168,7 +168,17 @@ namespace TrashCollector.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    return RedirectToAction("Index", "Users");
+                    if (user.UserRole == "Customer")
+                    {
+                        return RedirectToAction("Create", "TrashCollectorCustomers");
+                    }
+                    if (user.UserRole == "Employee")
+                    {
+                        return RedirectToAction("Create", "TrashCollectorEmployees");
+
+                    }
+                            return RedirectToAction("Index", "Users");
+
                 }
                 AddErrors(result);
             }

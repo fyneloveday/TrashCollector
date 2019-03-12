@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,13 +12,16 @@ using TrashCollector.Models;
 namespace TrashCollector.Controllers
 {
     public class TrashCollectorCustomersController : Controller
-    {
+    {        
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TrashCollectorCustomers
         public ActionResult Index()
         {
-            return View(db.TrashCollectorCustomers.ToList());
+            var loggedInUser = User.Identity.GetUserId();
+            var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).First();
+
+            return View(loggedCustomer);
         }
 
         // GET: TrashCollectorCustomers/Details/5
@@ -55,19 +59,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,City,ZipCode")] TrashCollectorCustomer trashCollectorCustomer)
+        public ActionResult Create(TrashCollectorCustomer trashCollectorCustomer)
         {
-            if (ModelState.IsValid)
-            {
+            string getAspUser = User.Identity.GetUserId();
+
+                trashCollectorCustomer.AspUserId = getAspUser;
                 db.TrashCollectorCustomers.Add(trashCollectorCustomer);
                 db.SaveChanges();
     
                 return RedirectToAction("Index, TrashCollectorCustomers");
-            }
-            else
-            {
-                return View(trashCollectorCustomer);
-            }
+           
                         
         }
 
@@ -80,6 +81,7 @@ namespace TrashCollector.Controllers
                 new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
                 new SelectListItem(){ Value="Thursday", Text = "Thursday"},
                 new SelectListItem(){ Value="Friday", Text = "Friday"}
+
             };
             return View();
         }

@@ -12,6 +12,8 @@ namespace TrashCollector.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public string AspUserId { get; set; }
+        public int ZipCode { get; set; }
+        public IEnumerable<int> ZipCodeSelected { get; set; }
     }
 }
