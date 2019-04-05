@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201903120316043_Added customer asp.user.Designer.cs">
       <DependentUpon>201903120316043_Added customer asp.user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904051657341_DbUpdate.cs" />
+    <Compile Include="Migrations\201904051657341_DbUpdate.Designer.cs">
+      <DependentUpon>201904051657341_DbUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903120316043_Added customer asp.user.resx">
       <DependentUpon>201903120316043_Added customer asp.user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904051657341_DbUpdate.resx">
+      <DependentUpon>201904051657341_DbUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
