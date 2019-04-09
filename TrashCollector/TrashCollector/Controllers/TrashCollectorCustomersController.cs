@@ -44,7 +44,7 @@ namespace TrashCollector.Controllers
                 new SelectListItem(){ Value="Thursday", Text = "Thursday"},
                 new SelectListItem(){ Value="Friday", Text = "Friday"}
             };
-            return View(trashCollectorCustomer);
+            return RedirectToAction("Create");
         }
 
         // GET: TrashCollectorCustomers/Create
@@ -68,7 +68,7 @@ namespace TrashCollector.Controllers
     
                 return RedirectToAction("Index, TrashCollectorCustomers");                        
         }
-
+        [HttpGet]
         public ActionResult CreatePickup()
         {
             ViewBag.PickupDay = new List<SelectListItem>()

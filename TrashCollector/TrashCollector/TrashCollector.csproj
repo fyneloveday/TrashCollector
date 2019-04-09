@@ -215,10 +215,19 @@
     <Compile Include="Migrations\201904051657341_DbUpdate.Designer.cs">
       <DependentUpon>201904051657341_DbUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904051957327_DbUpdate1.cs" />
+    <Compile Include="Migrations\201904051957327_DbUpdate1.Designer.cs">
+      <DependentUpon>201904051957327_DbUpdate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904052038469_DbUpdate2.cs" />
+    <Compile Include="Migrations\201904052038469_DbUpdate2.Designer.cs">
+      <DependentUpon>201904052038469_DbUpdate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PickupWeek.cs" />
     <Compile Include="Models\TrashCollectorCustomer.cs" />
     <Compile Include="Models\TrashCollectorEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -338,6 +347,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904051657341_DbUpdate.resx">
       <DependentUpon>201904051657341_DbUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904051957327_DbUpdate1.resx">
+      <DependentUpon>201904051957327_DbUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904052038469_DbUpdate2.resx">
+      <DependentUpon>201904052038469_DbUpdate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
