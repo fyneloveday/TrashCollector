@@ -42,23 +42,13 @@
             @Html.DisplayFor(model => model.ZipCode)
         </dd>
 
-        <div class="form-group">
-            @Html.Label("Pickup Day", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("Name")*@
-                @Html.DropDownList("PickupDay", (IEnumerable<SelectListItem>)ViewBag.PickupDay, null, new { @class = "form-control" })
+        <dt>
+            @Html.DisplayFor(model => model.PickupWeek)
+        </dt>
 
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Backup Pickup Day", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("Name")*@
-                @Html.DropDownList("BackupPickupDay", (IEnumerable<SelectListItem>)ViewBag.PickupDay, null, new { @class = "form-control" })
-
-            </div>
-        </div>
+        <dd>
+            @Html.DisplayFor(model => model.PickupWeek)
+        </dd>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

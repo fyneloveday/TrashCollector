@@ -71,15 +71,15 @@ namespace TrashCollector.Controllers
         [HttpGet]
         public ActionResult CreatePickup()
         {
-            ViewBag.PickupDay = new List<SelectListItem>()
-            {
-                new SelectListItem(){ Value="Monday", Text = "Monday"},
-                new SelectListItem(){ Value="Tuesday", Text = "Tuesday"},
-                new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
-                new SelectListItem(){ Value="Thursday", Text = "Thursday"},
-                new SelectListItem(){ Value="Friday", Text = "Friday"}
+            //ViewBag.PickupDay = new List<SelectListItem>()
+            //{
+            //    new SelectListItem(){ Value="Monday", Text = "Monday"},
+            //    new SelectListItem(){ Value="Tuesday", Text = "Tuesday"},
+            //    new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
+            //    new SelectListItem(){ Value="Thursday", Text = "Thursday"},
+            //    new SelectListItem(){ Value="Friday", Text = "Friday"}
 
-            };
+            //};
             return View();
         }
 

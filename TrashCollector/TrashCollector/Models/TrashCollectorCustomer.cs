@@ -27,8 +27,7 @@ namespace TrashCollector.Models
         public int ZipCode { get; set; }
         [Required]
         [Display(Name = "Pickup Day")]
-        public string PickupDay { get; set; }
-        public IEnumerable<SelectListItem> DaysOfTheWeek { get; set; }
+        public PickupWeek PickupWeek { get; set; }
         public double Bill { get; set; }
     }
 }

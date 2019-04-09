@@ -223,6 +223,18 @@
     <Compile Include="Migrations\201904052038469_DbUpdate2.Designer.cs">
       <DependentUpon>201904052038469_DbUpdate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904092019319_GetDb.cs" />
+    <Compile Include="Migrations\201904092019319_GetDb.Designer.cs">
+      <DependentUpon>201904092019319_GetDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904092033100_GetDb1.cs" />
+    <Compile Include="Migrations\201904092033100_GetDb1.Designer.cs">
+      <DependentUpon>201904092033100_GetDb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904092042508_GetDb2.cs" />
+    <Compile Include="Migrations\201904092042508_GetDb2.Designer.cs">
+      <DependentUpon>201904092042508_GetDb2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -353,6 +365,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904052038469_DbUpdate2.resx">
       <DependentUpon>201904052038469_DbUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904092019319_GetDb.resx">
+      <DependentUpon>201904092019319_GetDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904092033100_GetDb1.resx">
+      <DependentUpon>201904092033100_GetDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904092042508_GetDb2.resx">
+      <DependentUpon>201904092042508_GetDb2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

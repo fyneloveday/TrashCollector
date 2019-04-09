@@ -6,17 +6,17 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class PickupWeek
+    public enum PickupWeek
     {
         [Display(Name = "Monday")]
-        public string Mondaay { get; set; }
+        Monday,
         [Display(Name = "Tuesday")]
-        public string Tuesday { get; set; }
+        Tuesday,
         [Display(Name = "Wednesday")]
-        public string Wednesday { get; set; }
+        Wednesday,
         [Display(Name = "Thursday")]
-        public string Thursday { get; set; }
+        Thursday,
         [Display(Name = "Friday")]
-        public string Friday { get; set; }
+        Friday,
     }
 }
