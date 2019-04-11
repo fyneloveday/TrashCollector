@@ -11,7 +11,7 @@ namespace TrashCollector.Controllers
 {
 
     [Authorize]
-    public class usersController : Controller
+    public class UsersController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

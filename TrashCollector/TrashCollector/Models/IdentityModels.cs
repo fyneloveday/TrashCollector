@@ -23,6 +23,7 @@ namespace TrashCollector.Models
     {
         public DbSet<TrashCollectorEmployee> Employees;
         public DbSet<TrashCollectorCustomer> Customers;
+        
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

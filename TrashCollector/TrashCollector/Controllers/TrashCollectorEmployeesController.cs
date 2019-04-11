@@ -100,6 +100,7 @@ namespace TrashCollector.Controllers
             return View(trashCollectorEmployee);
         }
 
+
         // GET: TrashCollectorEmployees/Delete/5
         public ActionResult Delete(int? id)
         {

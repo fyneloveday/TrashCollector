@@ -18,10 +18,10 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorCustomers
         public ActionResult Index()
         {
-            var loggedInUser = User.Identity.GetUserId();
-            var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).First();
-
-            return View(loggedCustomer);
+            //var loggedInUser = User.Identity.GetUserId();
+            //var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).First();
+            var customer = db.TrashCollectorCustomers.FirstOrDefault();
+            return View(customer);
         }
 
         // GET: TrashCollectorCustomers/Details/5
@@ -66,7 +66,7 @@ namespace TrashCollector.Controllers
                 db.TrashCollectorCustomers.Add(trashCollectorCustomer);
                 db.SaveChanges();
     
-                return RedirectToAction("Index, TrashCollectorCustomers");                        
+                return RedirectToAction("Index", "TrashCollectorCustomers");                        
         }
         [HttpGet]
         public ActionResult CreatePickup()
@@ -105,7 +105,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,City,ZipCode")] TrashCollectorCustomer trashCollectorCustomer)
+        public ActionResult Edit(TrashCollectorCustomer trashCollectorCustomer)
         {
             if (ModelState.IsValid)
             {

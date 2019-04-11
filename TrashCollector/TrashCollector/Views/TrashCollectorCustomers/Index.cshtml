@@ -35,15 +35,22 @@
         <td>
             @Html.DisplayFor(model => model.ZipCode)
         </td>
-    </tr>
-
-
+        <th>
+            @Html.DisplayNameFor(model => model.PickupWeek)
+        </th>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+            @Html.DisplayFor(model => model.PickupWeek)
         </td>
+        <th></th>
     
 
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+            </td>
 
-</table>
+    </tr>
+
+    
+ </table>

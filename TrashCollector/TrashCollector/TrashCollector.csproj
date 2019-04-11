@@ -179,7 +179,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrashCollectorCustomersController.cs" />
     <Compile Include="Controllers\TrashCollectorEmployeesController.cs" />
-    <Compile Include="Controllers\usersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
