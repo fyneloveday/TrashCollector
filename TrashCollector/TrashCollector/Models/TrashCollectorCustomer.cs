@@ -27,7 +27,9 @@ namespace TrashCollector.Models
         public int ZipCode { get; set; }
         [Required]
         [Display(Name = "Pickup Day")]
-        public PickupWeek PickupWeek { get; set; }
+        public PickupWeek PickupDay { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime BackupPickupDay { get; set; }
         public double Bill { get; set; }
     }
 }
