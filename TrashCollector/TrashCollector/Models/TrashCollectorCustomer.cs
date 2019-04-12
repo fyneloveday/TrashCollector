@@ -28,7 +28,15 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Pickup Day")]
         public PickupWeek PickupDay { get; set; }
-        public DateTime BackupPickupDay { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Backup Pickup Day")]
+        public DateTime? BackupPickupDay { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Start Of Pickup Suspension")]
+        public DateTime? StartPickupSuspension { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "End Of Pickup Suspension")]
+        public DateTime? EndPickupSuspension { get; set; }
         public double Bill { get; set; }
     }
 }
