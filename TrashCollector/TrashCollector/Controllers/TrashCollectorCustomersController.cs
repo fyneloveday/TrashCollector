@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -60,13 +62,15 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TrashCollectorCustomer trashCollectorCustomer)
         {
-            string getAspUser = User.Identity.GetUserId();
-
-                trashCollectorCustomer.AspUserId = getAspUser;
-                db.TrashCollectorCustomers.Add(trashCollectorCustomer);
-                db.SaveChanges();
-    
-                return RedirectToAction("Index", "TrashCollectorCustomers");                        
+            {
+                {
+                    string getAspUser = User.Identity.GetUserId();
+                    trashCollectorCustomer.AspUserId = getAspUser;
+                    db.TrashCollectorCustomers.Add(trashCollectorCustomer);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index", "TrashCollectorCustomers");
+            }
         }
 
         [HttpGet]

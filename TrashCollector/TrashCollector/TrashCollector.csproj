@@ -239,6 +239,14 @@
     <Compile Include="Migrations\201904111930381_DbUpdate3.Designer.cs">
       <DependentUpon>201904111930381_DbUpdate3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904112200105_DbUpdate4.cs" />
+    <Compile Include="Migrations\201904112200105_DbUpdate4.Designer.cs">
+      <DependentUpon>201904112200105_DbUpdate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904121542459_DbContexts.cs" />
+    <Compile Include="Migrations\201904121542459_DbContexts.Designer.cs">
+      <DependentUpon>201904121542459_DbContexts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -444,6 +452,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904111930381_DbUpdate3.resx">
       <DependentUpon>201904111930381_DbUpdate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904112200105_DbUpdate4.resx">
+      <DependentUpon>201904112200105_DbUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904121542459_DbContexts.resx">
+      <DependentUpon>201904121542459_DbContexts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

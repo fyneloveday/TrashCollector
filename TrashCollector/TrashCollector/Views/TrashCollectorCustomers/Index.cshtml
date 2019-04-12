@@ -41,14 +41,23 @@
         <td>
             @Html.DisplayFor(model => model.PickupDay)
         </td>
+        <th>
+            @Html.DisplayNameFor(model => model.BackupPickupDay)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.BackupPickupDay)
+        </td>
         <th></th>
-    
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-            </td>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </td>
 
     </tr>
 
