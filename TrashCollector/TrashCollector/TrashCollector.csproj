@@ -263,6 +263,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\PickupWeek.cs" />
     <Compile Include="Models\TrashCollectorCustomer.cs" />
     <Compile Include="Models\TrashCollectorEmployee.cs" />
