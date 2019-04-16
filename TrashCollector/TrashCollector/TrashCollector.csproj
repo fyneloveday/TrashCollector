@@ -259,12 +259,25 @@
     <Compile Include="Migrations\201904121718531_DbContexts3.Designer.cs">
       <DependentUpon>201904121718531_DbContexts3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904122225024_DbContexts4.cs" />
+    <Compile Include="Migrations\201904122225024_DbContexts4.Designer.cs">
+      <DependentUpon>201904122225024_DbContexts4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904152314208_DbUpdate5.cs" />
+    <Compile Include="Migrations\201904152314208_DbUpdate5.Designer.cs">
+      <DependentUpon>201904152314208_DbUpdate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904160027439_DbUpdate6.cs" />
+    <Compile Include="Migrations\201904160027439_DbUpdate6.Designer.cs">
+      <DependentUpon>201904160027439_DbUpdate6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\PickupWeek.cs" />
+    <Compile Include="Models\RouteZipCodes.cs" />
     <Compile Include="Models\TrashCollectorCustomer.cs" />
     <Compile Include="Models\TrashCollectorEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -403,6 +416,7 @@
     <Content Include="Views\TrashCollectorEmployees\Delete.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Details.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\GetMyPickupList.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -480,6 +494,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904121718531_DbContexts3.resx">
       <DependentUpon>201904121718531_DbContexts3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904122225024_DbContexts4.resx">
+      <DependentUpon>201904122225024_DbContexts4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904152314208_DbUpdate5.resx">
+      <DependentUpon>201904152314208_DbUpdate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904160027439_DbUpdate6.resx">
+      <DependentUpon>201904160027439_DbUpdate6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

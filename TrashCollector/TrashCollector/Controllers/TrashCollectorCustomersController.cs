@@ -20,10 +20,10 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorCustomers
         public ActionResult Index()
         {
-            //var loggedInUser = User.Identity.GetUserId();
-            //var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).First();
-            var customer = db.TrashCollectorCustomers.FirstOrDefault();
-            return View(customer);
+            var loggedInUser = User.Identity.GetUserId();
+            var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).Single();
+            //var customer = db.TrashCollectorCustomers.FirstOrDefault();
+            return View();
         }
 
         // GET: TrashCollectorCustomers/Details/5
@@ -62,21 +62,11 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TrashCollectorCustomer trashCollectorCustomer)
         {
-            {
-                {
-                    string getAspUser = User.Identity.GetUserId();
-                    trashCollectorCustomer.AspUserId = getAspUser;
-                    db.TrashCollectorCustomers.Add(trashCollectorCustomer);
-                    db.SaveChanges();
-                }
-                return RedirectToAction("Index", "TrashCollectorCustomers");
-            }
-        }
-
-        [HttpGet]
-        public ActionResult CreatePickup()
-        {
-            return View();
+            string getAspUser = User.Identity.GetUserId();
+            trashCollectorCustomer.AspUserId = getAspUser;
+            db.TrashCollectorCustomers.Add(trashCollectorCustomer);
+            db.SaveChanges();
+            return RedirectToAction("Index", "TrashCollectorCustomers");
         }
 
 

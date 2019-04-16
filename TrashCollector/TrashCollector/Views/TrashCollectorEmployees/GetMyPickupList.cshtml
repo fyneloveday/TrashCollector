@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<TrashCollector.Models.TrashCollectorCustomer>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -18,10 +12,25 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspUserId)
+            @Html.DisplayNameFor(model => model.City)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickupDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackupPickupDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartPickupSuspension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndPickupSuspension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bill)
         </th>
         <th></th>
     </tr>
@@ -35,10 +44,25 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspUserId)
+            @Html.DisplayFor(modelItem => item.City)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickupDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackupPickupDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartPickupSuspension)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndPickupSuspension)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bill)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

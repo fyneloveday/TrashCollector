@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -18,8 +19,8 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         public string AspUserId { get; set; }
         [Required]
-        [Display(Name = "Zip Code")]
-        public int ZipCode { get; set; }
+        [Display(Name = "Route By Zip")]
+        public int RouteZipCode { get; set; }
         public IEnumerable<int> ZipCodeSelected { get; set; }
     }
 }

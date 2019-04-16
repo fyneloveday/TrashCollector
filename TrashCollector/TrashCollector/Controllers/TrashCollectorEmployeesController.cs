@@ -18,11 +18,15 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorEmployees
         public ActionResult Index()
         {
-            var userLoggedIn = User.Identity.GetUserId();
+            RouteZipCodes routeZipCodes = new RouteZipCodes();
+            
+                 var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
-            var customersFromZip = db.TrashCollectorCustomers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+            var customersFromZip = db.TrashCollectorCustomers.Where(c => c.ZipCode == employee.RouteZipCode).ToList();
             return View(customersFromZip);
         }
+            
+        
 
         // GET: TrashCollectorEmployees/Details/5
         public ActionResult Details(int? id)
@@ -135,6 +139,11 @@ namespace TrashCollector.Controllers
             }
             base.Dispose(disposing);
         }
-        
+
+        public ActionResult GetMyPickupList()
+        {
+            return View();
+        }
+
     }
 }
