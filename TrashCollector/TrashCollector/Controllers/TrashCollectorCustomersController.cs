@@ -21,7 +21,7 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var loggedInUser = User.Identity.GetUserId();
-            var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).Single();
+            var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).FirstOrDefault();
             //var customer = db.TrashCollectorCustomers.FirstOrDefault();
             return View();
         }
@@ -46,7 +46,7 @@ namespace TrashCollector.Controllers
                 new SelectListItem(){ Value="Thursday", Text = "Thursday"},
                 new SelectListItem(){ Value="Friday", Text = "Friday"}
             };
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
         // GET: TrashCollectorCustomers/Create
@@ -66,7 +66,7 @@ namespace TrashCollector.Controllers
             trashCollectorCustomer.AspUserId = getAspUser;
             db.TrashCollectorCustomers.Add(trashCollectorCustomer);
             db.SaveChanges();
-            return RedirectToAction("Index", "TrashCollectorCustomers");
+            return RedirectToAction("Index");
         }
 
 

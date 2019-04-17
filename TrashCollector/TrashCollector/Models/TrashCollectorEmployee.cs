@@ -21,6 +21,8 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Route By Zip")]
         public int RouteZipCode { get; set; }
+        [Display(Name = "My Route Day")]
+        public PickupWeek RouteDay { get; set; }
         public IEnumerable<int> ZipCodeSelected { get; set; }
     }
 }

@@ -18,9 +18,9 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorEmployees
         public ActionResult Index()
         {
-            RouteZipCodes routeZipCodes = new RouteZipCodes();
+            //RouteZipCodes routeZipCodes = new RouteZipCodes();
             
-                 var userLoggedIn = User.Identity.GetUserId();
+            var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
             var customersFromZip = db.TrashCollectorCustomers.Where(c => c.ZipCode == employee.RouteZipCode).ToList();
             return View(customersFromZip);
@@ -140,10 +140,21 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult GetMyPickupList()
+        public ActionResult CustomersByDayIndex()
         {
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
+            //var customersByDay = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.).ToList();
+
             return View();
         }
+
+        //public ActionResult MyPickupByDays()
+        //{
+
+
+        //    return View(customersByDay);
+        //}
 
     }
 }
