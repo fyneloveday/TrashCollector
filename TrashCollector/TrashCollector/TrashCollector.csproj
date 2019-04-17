@@ -271,6 +271,14 @@
     <Compile Include="Migrations\201904160027439_DbUpdate6.Designer.cs">
       <DependentUpon>201904160027439_DbUpdate6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904172009269_DbUpdate7.cs" />
+    <Compile Include="Migrations\201904172009269_DbUpdate7.Designer.cs">
+      <DependentUpon>201904172009269_DbUpdate7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904172035120_DbUpdate8.cs" />
+    <Compile Include="Migrations\201904172035120_DbUpdate8.Designer.cs">
+      <DependentUpon>201904172035120_DbUpdate8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -418,6 +426,7 @@
     <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\GetMyPickupList.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\CustomersByDayIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -503,6 +512,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904160027439_DbUpdate6.resx">
       <DependentUpon>201904160027439_DbUpdate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904172009269_DbUpdate7.resx">
+      <DependentUpon>201904172009269_DbUpdate7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904172035120_DbUpdate8.resx">
+      <DependentUpon>201904172035120_DbUpdate8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

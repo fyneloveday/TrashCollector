@@ -23,6 +23,7 @@ namespace TrashCollector.Controllers
             var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
             var customersFromZip = db.TrashCollectorCustomers.Where(c => c.ZipCode == employee.RouteZipCode).ToList();
+
             return View(customersFromZip);
         }
             
@@ -144,9 +145,9 @@ namespace TrashCollector.Controllers
         {
             var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
-            //var customersByDay = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.).ToList();
+            var customersByDay = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
 
-            return View();
+            return View(customersByDay);
         }
 
         //public ActionResult MyPickupByDays()
