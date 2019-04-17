@@ -150,12 +150,5 @@ namespace TrashCollector.Controllers
             return View(customersByDay);
         }
 
-        //public ActionResult MyPickupByDays()
-        //{
-
-
-        //    return View(customersByDay);
-        //}
-
     }
 }

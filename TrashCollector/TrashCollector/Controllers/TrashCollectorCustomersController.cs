@@ -23,7 +23,7 @@ namespace TrashCollector.Controllers
             var loggedInUser = User.Identity.GetUserId();
             var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).FirstOrDefault();
             //var customer = db.TrashCollectorCustomers.FirstOrDefault();
-            return View();
+            return View(loggedCustomer);
         }
 
         // GET: TrashCollectorCustomers/Details/5
@@ -62,11 +62,21 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TrashCollectorCustomer trashCollectorCustomer)
         {
-            string getAspUser = User.Identity.GetUserId();
-            trashCollectorCustomer.AspUserId = getAspUser;
-            db.TrashCollectorCustomers.Add(trashCollectorCustomer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            trashCollectorCustomer.AspUserId = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                var getAspUser = User.Identity.GetUserId();
+                trashCollectorCustomer.AspUserId = getAspUser;
+                db.TrashCollectorCustomers.Add(trashCollectorCustomer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(trashCollectorCustomer);
+            }
+
         }
 
 
