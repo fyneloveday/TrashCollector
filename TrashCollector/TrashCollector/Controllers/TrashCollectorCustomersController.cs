@@ -105,7 +105,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trashCollectorCustomer).State = EntityState.Modified;
+                //db.Entry(trashCollectorCustomer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

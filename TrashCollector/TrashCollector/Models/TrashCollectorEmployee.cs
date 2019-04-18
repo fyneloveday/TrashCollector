@@ -17,6 +17,7 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [NotMapped]
         public string AspUserId { get; set; }
         [Required]
         [Display(Name = "Route By Zip")]

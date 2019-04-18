@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -38,5 +39,10 @@ namespace TrashCollector.Models
         public System.Data.Entity.DbSet<TrashCollector.Models.TrashCollectorEmployee> TrashCollectorEmployees { get; set; }
 
         public System.Data.Entity.DbSet<TrashCollector.Models.TrashCollectorCustomer> TrashCollectorCustomers { get; set; }
+
+        internal object Entry(object trashCollectorEmployee)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

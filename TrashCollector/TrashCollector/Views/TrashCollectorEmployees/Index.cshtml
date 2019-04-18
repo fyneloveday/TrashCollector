@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector.Models.TrashCollectorCustomer>
+﻿@model TrashCollector.Models.EmployeeLandingPage
 
 @{
     ViewBag.Title = "Index";
@@ -10,43 +10,52 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+
     <tr>
+        
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.TrashCollectorEmployee)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
+        <td>
+            @Html.DisplayFor(model => model.TrashCollectorEmployee)
+        </td>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CustomersByZip)
+        </th>*@
+        @*<td>
+            @Html.DisplayFor(model => model.CustomersByZip)
+        </td>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
-            @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.CustomersByZip)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model => item.FirstName)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.FirstName)
+            </td>
+            <th>
+                @Html.DisplayNameFor(Model => item.LastName)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.LastName)
+            </td>
+            <th>
+                @Html.DisplayNameFor(Model => item.ZipCode)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.ZipCode)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

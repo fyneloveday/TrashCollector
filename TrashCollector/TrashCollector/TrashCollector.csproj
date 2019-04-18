@@ -285,7 +285,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\PickupWeek.cs" />
-    <Compile Include="Models\RouteZipCodes.cs" />
+    <Compile Include="Models\EmployeeLandingPage.cs" />
     <Compile Include="Models\TrashCollectorCustomer.cs" />
     <Compile Include="Models\TrashCollectorEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -423,10 +423,11 @@
     <Content Include="Views\TrashCollectorEmployees\Create.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Delete.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Details.cshtml" />
-    <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\GetMyPickupList.cshtml" />
-    <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\CustomersByDayIndex.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\CustomersByDayEdit.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class RouteZipCodes
+    public class EmployeeLandingPage
     {
-        public TrashCollectorCustomer TrashCollectorCustomer { get; set; }
         public TrashCollectorEmployee TrashCollectorEmployee { get; set; }
+        public List<TrashCollectorCustomer> CustomersByZip { get; set; }
     }
 }
