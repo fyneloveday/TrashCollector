@@ -19,6 +19,9 @@
         <td>
             @Html.DisplayFor(model => model.TrashCollectorEmployee)
         </td>
+        @*@Html.Hidden("AsperUserId")*@
+
+
         @*<th>
             @Html.DisplayNameFor(model => model.CustomersByZip)
         </th>*@
@@ -51,9 +54,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Details", "Details", "TrashCollectorCustomersController", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", "TrashcollectorCustomersController", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
     }
