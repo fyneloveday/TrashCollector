@@ -7,7 +7,11 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") ||
+    @Html.ActionLink("My Details", "Details", "TrashCollectorEmployees") ||
+    @Html.ActionLink("Edit", "Edit", "TrashCollectorEmployees") ||
+    @Html.ActionLink("Delete", "Delete", "TrashCollectorEmployees") ||
+    @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
 </p>
 <table class="table">
 
@@ -19,15 +23,6 @@
         <td>
             @Html.DisplayFor(model => model.TrashCollectorEmployee)
         </td>
-        @*@Html.Hidden("AsperUserId")*@
-
-
-        @*<th>
-            @Html.DisplayNameFor(model => model.CustomersByZip)
-        </th>*@
-        @*<td>
-            @Html.DisplayFor(model => model.CustomersByZip)
-        </td>*@
         <th></th>
     </tr>
 
@@ -54,9 +49,12 @@
             </td>
 
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Details", "Details", "TrashCollectorCustomersController", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", "TrashcollectorCustomersController", new { /* id=item.PrimaryKey */ })
+                
+
+                @*@Html.ActionLink("Details", "Details", "TrashCollectorCustomers") ||*@
+                @Html.ActionLink("Edit", "RouteCustomerEdit", new { id = item.Id }) ||
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) ||
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) ||
             </td>
         </tr>
     }

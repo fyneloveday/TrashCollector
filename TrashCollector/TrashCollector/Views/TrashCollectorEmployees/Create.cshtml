@@ -29,13 +29,24 @@
             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
     </div>
+
     <div class="form-group">
         @Html.LabelFor(model => model.RouteZipCode, "ZipCode", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.RouteZipCode,new SelectList(Model.ZipCodeSelected), htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.RouteZipCode, new SelectList(Model.ZipCodeSelected), htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.RouteZipCode, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RouteDay, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RouteDay, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RouteDay, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />

@@ -37,6 +37,9 @@ namespace TrashCollector.Models
         [DataType(DataType.Date)]
         [Display(Name = "End Of Pickup Suspension")]
         public DateTime? EndPickupSuspension { get; set; }
+        [Required]
+        [Display(Name = "Pickup Status")]
+        public PickupStatus PickupStatus { get; set; }
         public double Bill { get; set; }
     }
 }

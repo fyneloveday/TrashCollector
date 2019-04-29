@@ -24,6 +24,7 @@ namespace TrashCollector.Models
     {
         public DbSet<TrashCollectorEmployee> Employees;
         public DbSet<TrashCollectorCustomer> Customers;
+        public DbSet<EmployeeLandingPage> employeeLandingPages;
         
 
         public ApplicationDbContext()

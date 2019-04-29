@@ -38,15 +38,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PickupDay = new List<SelectListItem>()
-            {
-                new SelectListItem(){ Value="Monday", Text = "Monday"},
-                new SelectListItem(){ Value="Tuesday", Text = "Tuesday"},
-                new SelectListItem(){ Value="Wednesday", Text = "Wednesday"},
-                new SelectListItem(){ Value="Thursday", Text = "Thursday"},
-                new SelectListItem(){ Value="Friday", Text = "Friday"}
-            };
-            return RedirectToAction("Index");
+            return View(trashCollectorCustomer);
         }
 
         // GET: TrashCollectorCustomers/Create
@@ -103,13 +95,17 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TrashCollectorCustomer trashCollectorCustomer)
         {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(trashCollectorCustomer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(trashCollectorCustomer);
+            var customer = db.TrashCollectorCustomers.Single(m => m.Id == trashCollectorCustomer.Id);
+            customer.FirstName = trashCollectorCustomer.FirstName;
+            customer.LastName = trashCollectorCustomer.LastName;
+            customer.ZipCode = trashCollectorCustomer.ZipCode;
+            customer.PickupDay = trashCollectorCustomer.PickupDay;
+            customer.BackupPickupDay = trashCollectorCustomer.BackupPickupDay;
+            customer.StartPickupSuspension = trashCollectorCustomer.StartPickupSuspension;
+            customer.EndPickupSuspension = trashCollectorCustomer.EndPickupSuspension;
+            customer.PickupStatus = trashCollectorCustomer.PickupStatus;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: TrashCollectorCustomers/Delete/5

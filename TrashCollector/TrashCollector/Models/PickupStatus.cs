@@ -6,10 +6,11 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class Payment
+    public enum PickupStatus
     {
-        public decimal FirstNumber { get; set; }
-        public decimal SecondNumber { get; set; }
-        public decimal Result { get; set; }
+        [Display(Name = "Pending")]
+        Pending,
+        [Display(Name = "Done")]
+        Done,
     }
 }

@@ -28,23 +28,17 @@ namespace TrashCollector.Controllers
             landingPage.CustomersByZip = customersFromZip;
 
             return View(landingPage);
-        }
-            
+        } 
         
 
         // GET: TrashCollectorEmployees/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Find(id);
-            if (trashCollectorEmployee == null)
-            {
-                return HttpNotFound();
-            }
+            var loggedInUser = User.Identity.GetUserId();
+            var trashCollectorEmployee = db.TrashCollectorEmployees.Where(t => t.AspUserId == loggedInUser).First();
+            
             return View(trashCollectorEmployee);
+
         }
 
         // GET: TrashCollectorEmployees/Create
@@ -52,9 +46,10 @@ namespace TrashCollector.Controllers
         {
             var selectedZip = db.TrashCollectorCustomers.Select(c => c.ZipCode).ToList();
             TrashCollectorEmployee Employee = new TrashCollectorEmployee();
-         
+
             Employee.ZipCodeSelected = selectedZip;
             return View(Employee);
+
         }
 
         // POST: TrashCollectorEmployees/Create
@@ -64,14 +59,21 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TrashCollectorEmployee trashCollectorEmployee)
         {
-           
-                string getAspUser = User.Identity.GetUserId();
+            trashCollectorEmployee.AspUserId = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                var getAspUser = User.Identity.GetUserId();
                 trashCollectorEmployee.AspUserId = getAspUser;
                 db.TrashCollectorEmployees.Add(trashCollectorEmployee);
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
-        
+            }
+            else
+            {
+                return View(trashCollectorEmployee);
+            }
+
         }
 
 
@@ -79,15 +81,16 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorEmployees/Edit/5
         public ActionResult Edit(int? Id)
         {
-            if (Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var loggedInUser = User.Identity.GetUserId();
+            //if (Id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Find(Id);
-            if (trashCollectorEmployee == null)
-            {
-                return HttpNotFound();
-            }
+            //if (trashCollectorEmployee == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(trashCollectorEmployee);
         }
     
@@ -97,16 +100,28 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(TrashCollectorEmployee trashCollectorEmployee)
         {
-            if (ModelState.IsValid)
-            {
-                TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Where(t => t.Id == Id).FirstOrDefault();
-                //db.Entry(trashCollectorEmployee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            var loggedInUser = User.Identity.GetUserId();
+            var employee = db.TrashCollectorEmployees.Single(m => m.Id == trashCollectorEmployee.Id);
+            //employee.FirstName = trashCollectorEmployee.FirstName;
+            //employee.LastName = trashCollectorEmployee.LastName;
+            //employee.RouteZipCode = trashCollectorEmployee.RouteZipCode;
+            //employee.RouteDay = trashCollectorEmployee.RouteDay;
+            //employee.PickupStatus = trashCollectorEmployee.PickupStatus;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Where(t => t.Id == Id).FirstOrDefault();
+            //    //db.Entry(trashCollectorEmployee).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View();
         }
 
 
@@ -145,8 +160,19 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
 
+
         public ActionResult CustomersByDayIndex()
         {
+
+            //var userLoggedIn = User.Identity.GetUserId();
+            //var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
+            //var customersToday = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
+            //EmployeeLandingPage landingPage = new EmployeeLandingPage();
+            //landingPage.TrashCollectorEmployee = employee;
+            //landingPage.CustomersByZip = customersToday;
+            //return View(customersToday);
+
+
             var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
             var customersByDay = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
@@ -172,14 +198,21 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CustomersByDay(TrashCollectorCustomer customerDay)
         {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(customerDay).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("CustomersByDayIndex");
-            }
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
+            var customersToday = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
+            EmployeeLandingPage landingPage = new EmployeeLandingPage();
+            landingPage.TrashCollectorEmployee = employee;
+            landingPage.CustomersByZip = customersToday;
             return View(customerDay);
         }
+
+        public ActionResult RouteCustomerEdit(int? id)
+        {
+            var routeCustomer = db.TrashCollectorCustomers.Find(id);
+            return View(routeCustomer);
+        }
+
 
     }
 }

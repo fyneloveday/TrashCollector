@@ -23,6 +23,9 @@ namespace TrashCollector.Models
         public int RouteZipCode { get; set; }
         [Display(Name = "My Route Day")]
         public PickupWeek RouteDay { get; set; }
+        [Required]
+        [Display(Name = "Pickup Status")]
+        public PickupStatus PickupStatus { get; set; }
         public IEnumerable<int> ZipCodeSelected { get; set; }
     }
 }
