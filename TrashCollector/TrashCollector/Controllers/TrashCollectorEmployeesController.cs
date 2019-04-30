@@ -194,6 +194,7 @@ namespace TrashCollector.Controllers
             return View(employeeByDay);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CustomersByDay(TrashCollectorCustomer customerDay)
@@ -211,6 +212,25 @@ namespace TrashCollector.Controllers
         {
             var routeCustomer = db.TrashCollectorCustomers.Find(id);
             return View(routeCustomer);
+        }
+
+        [HttpPost]
+        public ActionResult RouteCustomerEdit(TrashCollectorCustomer editedCustomer)
+        {
+            try
+            {
+                //db.Entry(editedCustomer).State = EntityState.Modified;
+                var customer = db.TrashCollectorCustomers.Single(m => m.Id == editedCustomer.Id);
+                customer.PickupStatus = editedCustomer.PickupStatus;
+                customer.Bill = editedCustomer.Bill;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(editedCustomer);
+            }
         }
 
 
