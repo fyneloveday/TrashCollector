@@ -18,13 +18,20 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Street")]
+        public string Street { get; set; }
         [Required]
         [Display(Name = "City")]
         public string City { get; set; }
+        [Required]
+        [Display(Name = "State")]
+        public string State { get; set; }
         public string AspUserId { get; set; }
         [Required]
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        public float Lat { get; set; }
+        public float Long { get; set; }
         [Required]
         [Display(Name = "Pickup Day")]
         public PickupWeek PickupDay { get; set; }

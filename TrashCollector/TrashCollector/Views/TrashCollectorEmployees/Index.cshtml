@@ -6,69 +6,139 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create") ||
-    @Html.ActionLink("My Details", "Details", "TrashCollectorEmployees") ||
-    @Html.ActionLink("Edit", "Edit", "TrashCollectorEmployees") ||
-    @Html.ActionLink("Delete", "Delete", "TrashCollectorEmployees") ||
-    @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
-</p>
-<table class="table">
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+@section scripts {
+<section class="scripts">
 
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.TrashCollectorEmployee)
-        </th>
-        <td>
-            @Html.DisplayFor(model => model.TrashCollectorEmployee)
-        </td>
-        <th></th>
-    </tr>
+    <div id="googleMap" style="height:400px;width:100%;"></div>
+    <script>
+        $.get{"@Url.Action("GetAllPickups", "TrashCollectorEmployees")", function myMap() {
+            var myCenter = new google.maps.LatLng(43.038, -87.906);
+            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var marker = new google.maps.Marker({ position: myCenter });
+            var coord = { lat: latitudes[i], lng: longitudes[i] };
+            markers[i] = new google.maps.Marker(
+                {
 
-    @foreach (var item in Model.CustomersByZip)
-    {
+                    position: coord,
+                    map: map,
+                    title: names[i]
+                });
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&callback=myMap"></script>
+
+    <div id="dvMap" style="width: 500px; height: 500px">
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&sensor=false"></script>
+    <script type="text/javascript">
+        var markers = [{
+            "title": 'Milwaukee',
+            "lat": '43.038',
+            "lng": '-87.906',
+            "description": 'Milwaukee',
+            "type": 'City'
+        }]
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.title
+                });
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent(data.description);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
+        }
+    </script>
+
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create") ||
+        @Html.ActionLink("My Details", "Details", "TrashCollectorEmployees") ||
+        @Html.ActionLink("Edit", "Edit", "TrashCollectorEmployees") ||
+        @Html.ActionLink("Delete", "Delete", "TrashCollectorEmployees") ||
+        @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
+    </p>
+    <table class="table">
+
         <tr>
-            <th>
-                @Html.DisplayNameFor(Model => item.FirstName)
-            </th>
-            <td>
-                @Html.DisplayFor(Model => item.FirstName)
-            </td>
-            <th>
-                @Html.DisplayNameFor(Model => item.LastName)
-            </th>
-            <td>
-                @Html.DisplayFor(Model => item.LastName)
-            </td>
-            <th>
-                @Html.DisplayNameFor(Model => item.ZipCode)
-            </th>
-            <td>
-                @Html.DisplayFor(Model => item.ZipCode)
-            </td>
-            <th>
-                @Html.DisplayNameFor(Model => item.PickupStatus)
-            </th>
-            <td>
-                @Html.DisplayFor(Model => item.PickupStatus)
-            </td>
-            <th>
-                @Html.DisplayNameFor(Model => item.Bill)
-            </th>
-            <td>
-                @Html.DisplayFor(Model => item.Bill)
-            </td>
 
+            <th>
+                @Html.DisplayNameFor(model => model.TrashCollectorEmployee)
+            </th>
             <td>
-                
-
-                @*@Html.ActionLink("Details", "Details", "TrashCollectorCustomers") ||*@
-                @Html.ActionLink("Edit", "RouteCustomerEdit", new { id = item.Id }) ||
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) ||
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) ||
+                @Html.DisplayFor(model => model.TrashCollectorEmployee)
             </td>
+            <th></th>
         </tr>
-    }
+
+        @foreach (var item in Model.CustomersByZip)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(Model => item.FirstName)
+                </th>
+                <td>
+                    @Html.DisplayFor(Model => item.FirstName)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(Model => item.LastName)
+                </th>
+                <td>
+                    @Html.DisplayFor(Model => item.LastName)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(Model => item.ZipCode)
+                </th>
+                <td>
+                    @Html.DisplayFor(Model => item.ZipCode)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(Model => item.PickupStatus)
+                </th>
+                <td>
+                    @Html.DisplayFor(Model => item.PickupStatus)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(Model => item.Bill)
+                </th>
+                <td>
+                    @Html.DisplayFor(Model => item.Bill)
+                </td>
+
+                <td>
+
+
+                    @*@Html.ActionLink("Details", "Details", "TrashCollectorCustomers") ||*@
+                    @Html.ActionLink("Edit", "RouteCustomerEdit", new { id = item.Id }) ||
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) ||
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }) ||*@
+                </td>
+
+
+
+            </tr>
+
+        }
+
+}
 
 </table>

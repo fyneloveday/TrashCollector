@@ -311,7 +311,16 @@
     <Compile Include="Migrations\201904291854493_DbUpdate15.Designer.cs">
       <DependentUpon>201904291854493_DbUpdate15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905221819314_DbUpdate16.cs" />
+    <Compile Include="Migrations\201905221819314_DbUpdate16.Designer.cs">
+      <DependentUpon>201905221819314_DbUpdate16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906072125037_MapStuff.cs" />
+    <Compile Include="Migrations\201906072125037_MapStuff.Designer.cs">
+      <DependentUpon>201906072125037_MapStuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Access.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\PickupStatus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -577,6 +586,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904291854493_DbUpdate15.resx">
       <DependentUpon>201904291854493_DbUpdate15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905221819314_DbUpdate16.resx">
+      <DependentUpon>201905221819314_DbUpdate16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906072125037_MapStuff.resx">
+      <DependentUpon>201906072125037_MapStuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
