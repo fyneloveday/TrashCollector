@@ -46,8 +46,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Stripe.net, Version=27.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.27.1.3\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -319,9 +323,18 @@
     <Compile Include="Migrations\201906072125037_MapStuff.Designer.cs">
       <DependentUpon>201906072125037_MapStuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906112000404_DbUpdate17.cs" />
+    <Compile Include="Migrations\201906112000404_DbUpdate17.Designer.cs">
+      <DependentUpon>201906112000404_DbUpdate17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906141810496_ChargeViewModel.cs" />
+    <Compile Include="Migrations\201906141810496_ChargeViewModel.Designer.cs">
+      <DependentUpon>201906141810496_ChargeViewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Access.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ChargeViewModel.cs" />
     <Compile Include="Models\PickupStatus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -466,11 +479,13 @@
     <Content Include="Views\TrashCollectorEmployees\Delete.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\GetMyPickupList.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\CustomersByDayIndex.cshtml" />
-    <Content Include="Views\TrashCollectorEmployees\CustomersByDayEdit.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Edit.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Index.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\Details.cshtml" />
     <Content Include="Views\TrashCollectorEmployees\RouteCustomerEdit.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\PayFee.cshtml" />
+    <Content Include="Views\TrashCollectorCustomers\PayStatus.cshtml" />
+    <Content Include="Views\TrashCollectorEmployees\RouteCustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -592,6 +607,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906072125037_MapStuff.resx">
       <DependentUpon>201906072125037_MapStuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906112000404_DbUpdate17.resx">
+      <DependentUpon>201906112000404_DbUpdate17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906141810496_ChargeViewModel.resx">
+      <DependentUpon>201906141810496_ChargeViewModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

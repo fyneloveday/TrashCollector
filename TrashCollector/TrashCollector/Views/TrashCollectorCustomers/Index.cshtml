@@ -30,6 +30,12 @@
             @Html.DisplayFor(model => model.City)
         </td>
         <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.State)
+        </td>
+        <th>
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
         <td>
@@ -72,6 +78,7 @@
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
             @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+            @Html.ActionLink("Pay Fee", "PayFee", new { id = Model.Id })
         </td>
 
     </tr>

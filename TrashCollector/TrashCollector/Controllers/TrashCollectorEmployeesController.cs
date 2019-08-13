@@ -13,6 +13,8 @@ using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
 using System.Web.Helpers;
+using System.Configuration;
+using Stripe;
 
 namespace TrashCollector.Controllers
 {
@@ -23,7 +25,6 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorEmployees
         public ActionResult Index()
         {
-            //RouteZipCodes routeZipCodes = new RouteZipCodes();
             
             var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
@@ -87,15 +88,7 @@ namespace TrashCollector.Controllers
         public ActionResult Edit(int? Id)
         {
             var loggedInUser = User.Identity.GetUserId();
-            //if (Id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
             TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Find(Id);
-            //if (trashCollectorEmployee == null)
-            //{
-            //    return HttpNotFound();
-            //}
             return View(trashCollectorEmployee);
         }
     
@@ -109,24 +102,14 @@ namespace TrashCollector.Controllers
         {
             var loggedInUser = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Single(m => m.Id == trashCollectorEmployee.Id);
-            //employee.FirstName = trashCollectorEmployee.FirstName;
-            //employee.LastName = trashCollectorEmployee.LastName;
-            //employee.RouteZipCode = trashCollectorEmployee.RouteZipCode;
-            //employee.RouteDay = trashCollectorEmployee.RouteDay;
-            //employee.PickupStatus = trashCollectorEmployee.PickupStatus;
+            employee.FirstName = trashCollectorEmployee.FirstName;
+            employee.LastName = trashCollectorEmployee.LastName;
+            employee.RouteZipCode = trashCollectorEmployee.RouteZipCode;
+            employee.RouteDay = trashCollectorEmployee.RouteDay;
+            employee.PickupStatus = trashCollectorEmployee.PickupStatus;
             db.SaveChanges();
 
             return RedirectToAction("Index");
-
-
-            //if (ModelState.IsValid)
-            //{
-            //    TrashCollectorEmployee trashCollectorEmployee = db.TrashCollectorEmployees.Where(t => t.Id == Id).FirstOrDefault();
-            //    //db.Entry(trashCollectorEmployee).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //return View();
         }
 
 
@@ -168,34 +151,22 @@ namespace TrashCollector.Controllers
 
         public ActionResult CustomersByDayIndex()
         {
-
-            //var userLoggedIn = User.Identity.GetUserId();
-            //var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
-            //var customersToday = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
-            //EmployeeLandingPage landingPage = new EmployeeLandingPage();
-            //landingPage.TrashCollectorEmployee = employee;
-            //landingPage.CustomersByZip = customersToday;
-            //return View(customersToday);
-
-
             var userLoggedIn = User.Identity.GetUserId();
             var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
-            var customersByDay = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
-            return View(customersByDay);
+            var customersToday = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
+           
+            EmployeeLandingPage landingPage = new EmployeeLandingPage();
+            landingPage.TrashCollectorEmployee = employee;
+            landingPage.CustomersByZip = customersToday;
+            return View(customersToday);
         }
 
-        public ActionResult CustomersByDayEdit(int? id)
+        public JsonResult CustomerByDayOnMap()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TrashCollectorCustomer employeeByDay = db.TrashCollectorCustomers.Find(id);
-            if (employeeByDay == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employeeByDay);
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = db.TrashCollectorEmployees.Where(t => t.AspUserId == userLoggedIn).FirstOrDefault();
+            var data = db.TrashCollectorCustomers.Where(c => c.PickupDay == employee.RouteDay).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -210,6 +181,18 @@ namespace TrashCollector.Controllers
             landingPage.TrashCollectorEmployee = employee;
             landingPage.CustomersByZip = customersToday;
             return View(customerDay);
+        }
+
+        public ActionResult RouteCustomerDetails(int id)
+        {
+            var routeCustomer = db.TrashCollectorCustomers.Find(id);
+            return View(routeCustomer);
+        }
+
+        public JsonResult RouteCustomerOnMap(int id)
+        {
+            var data = db.TrashCollectorCustomers.Where(t => t.Id == id).SingleOrDefault();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RouteCustomerEdit(int? id)
@@ -251,7 +234,6 @@ namespace TrashCollector.Controllers
             stringBuilder.Append(customer.City.Replace(" ", "+"));
             stringBuilder.Append(";");
             stringBuilder.Append(customer.State.Replace(" ", "+"));
-            // example: string url = @"https://maps.googleapis.com/maps/api/geocode/json?address={stringBuilder.ToString()}1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ";
             string url = @"https://maps.googleapis.com/maps/api/geocode/json?address=" +
                     stringBuilder.ToString() + "&key=" + Models.Access.apiKey;
 

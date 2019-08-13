@@ -6,139 +6,127 @@
 
 <h2>Index</h2>
 
-<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
-@section scripts {
-<section class="scripts">
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 400px;
+        width: 100%
+    }
+</style>
+<br />
+<div class="jumbotron">
+    <div id="map"></div>
 
-    <div id="googleMap" style="height:400px;width:100%;"></div>
     <script>
-        $.get{"@Url.Action("GetAllPickups", "TrashCollectorEmployees")", function myMap() {
-            var myCenter = new google.maps.LatLng(43.038, -87.906);
-            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            var marker = new google.maps.Marker({ position: myCenter });
-            var coord = { lat: latitudes[i], lng: longitudes[i] };
-            markers[i] = new google.maps.Marker(
-                {
+        var map;
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 43.0343, lng: -87.9115 },
+                zoom: 12
+            });
 
-                    position: coord,
-                    map: map,
-                    title: names[i]
-                });
-            marker.setMap(map);
+            $.get("@Url.Action("GetAllLocation", "Home")", function (data, status) {
+                    var marker = [];
+                    var contentString = [];
+                    var infowindow = [];
+                    for (var i = 0; i < data.length; i++) {
+                        marker[i] = new google.maps.Marker({
+                            position: { lat: data[i].Lat, lng: data[i].Long },
+                            map: map
+                        });
+                        contentString[i] = '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<div id="bodyContent">' +
+                            '<h3 id="firstHeading" class="firstHeading">' + data[i].FirstName + ' ' + data[i].LastName + '</h3> ' +
+                            '<p>' + data[i].Street + '</p>' +
+                            '<p>' + data[i].City + '</p>' +
+                            '<p>' + data[i].State + ' ' + data[i].ZipCode + '</p>';
+                        infowindow[i] = new google.maps.InfoWindow({
+                            content: contentString[i]
+                        });
+                        var markerValue = marker[i];
+                        google.maps.event.addListener(marker[i], 'mouseover', (function (markerValue, i) {
+                            return function () {
+                                infowindow[i].open(map, marker[i]);
+                            }
+                        })(marker[i], i));
+                        google.maps.event.addListener(marker[i], 'mouseout', (function (markerValue, i) {
+                            return function () {
+                                infowindow[i].close();
+                            }
+                        })(marker[i], i));
+                        
+                    }
+                })
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&callback=myMap"></script>
-
-    <div id="dvMap" style="width: 500px; height: 500px">
-    </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&sensor=false"></script>
-    <script type="text/javascript">
-        var markers = [{
-            "title": 'Milwaukee',
-            "lat": '43.038',
-            "lng": '-87.906',
-            "description": 'Milwaukee',
-            "type": 'City'
-        }]
-        window.onload = function () {
-            var mapOptions = {
-                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
-                zoom: 8,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var infoWindow = new google.maps.InfoWindow();
-            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-            for (i = 0; i < markers.length; i++) {
-                var data = markers[i]
-                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    map: map,
-                    title: data.title
-                });
-                (function (marker, data) {
-                    google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent(data.description);
-                        infoWindow.open(map, marker);
-                    });
-                })(marker, data);
-            }
-        }
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&callback=initMap"
+            async defer></script>
+</div>
 
 
 
-    <p>
-        @Html.ActionLink("Create New", "Create") ||
-        @Html.ActionLink("My Details", "Details", "TrashCollectorEmployees") ||
-        @Html.ActionLink("Edit", "Edit", "TrashCollectorEmployees") ||
-        @Html.ActionLink("Delete", "Delete", "TrashCollectorEmployees") ||
-        @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
-    </p>
-    <table class="table">
+<p>
+    @Html.ActionLink("Create New", "Create") ||
+    @Html.ActionLink("My Details", "Details", new { id = Model.TrashCollectorEmployee.Id }) ||
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TrashCollectorEmployee.Id }) ||
+    @Html.ActionLink("Delete", "Delete", new { id = Model.TrashCollectorEmployee.Id }) ||
+    @Html.ActionLink("Customers By Day", "CustomersByDayIndex", "TrashCollectorEmployees")
+</p>
+<table class="table">
 
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TrashCollectorEmployee)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.TrashCollectorEmployee)
+        </td>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.CustomersByZip)
+    {
         <tr>
-
             <th>
-                @Html.DisplayNameFor(model => model.TrashCollectorEmployee)
+                @Html.DisplayNameFor(Model => item.FirstName)
             </th>
             <td>
-                @Html.DisplayFor(model => model.TrashCollectorEmployee)
+                @Html.DisplayFor(Model => item.FirstName)
             </td>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(Model => item.LastName)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.LastName)
+            </td>
+            <th>
+                @Html.DisplayNameFor(Model => item.ZipCode)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.ZipCode)
+            </td>
+            <th>
+                @Html.DisplayNameFor(Model => item.PickupStatus)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.PickupStatus)
+            </td>
+            <th>
+                @Html.DisplayNameFor(Model => item.Bill)
+            </th>
+            <td>
+                @Html.DisplayFor(Model => item.Bill)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "RouteCustomerEdit", new { id = item.Id }) ||
+                @Html.ActionLink("Details", "RouteCustomerDetails", new { id = item.Id }) ||
+            </td>
         </tr>
 
-        @foreach (var item in Model.CustomersByZip)
-        {
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(Model => item.FirstName)
-                </th>
-                <td>
-                    @Html.DisplayFor(Model => item.FirstName)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(Model => item.LastName)
-                </th>
-                <td>
-                    @Html.DisplayFor(Model => item.LastName)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(Model => item.ZipCode)
-                </th>
-                <td>
-                    @Html.DisplayFor(Model => item.ZipCode)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(Model => item.PickupStatus)
-                </th>
-                <td>
-                    @Html.DisplayFor(Model => item.PickupStatus)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(Model => item.Bill)
-                </th>
-                <td>
-                    @Html.DisplayFor(Model => item.Bill)
-                </td>
-
-                <td>
-
-
-                    @*@Html.ActionLink("Details", "Details", "TrashCollectorCustomers") ||*@
-                    @Html.ActionLink("Edit", "RouteCustomerEdit", new { id = item.Id }) ||
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) ||
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }) ||*@
-                </td>
-
-
-
-            </tr>
-
-        }
-
-}
+    }
 
 </table>

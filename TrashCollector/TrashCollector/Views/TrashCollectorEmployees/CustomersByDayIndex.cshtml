@@ -6,6 +6,65 @@
 
 <h2>CustomersByDayIndex</h2>
 
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 500px;
+        width: 100%
+    }
+</style>
+<br />
+<div class="jumbotron">
+    <div id="map"></div>
+
+    <script>
+        var map;
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 43.0343, lng: -87.9115 },
+                zoom: 12
+            });
+
+            $.get("@Url.Action("CustomerByDayOnMap", "TrashCollectorEmployees")", function (data, status) {
+                    var marker = [];
+                    var contentString = [];
+                    var infowindow = [];
+                    for (var i = 0; i < data.length; i++) {
+                        marker[i] = new google.maps.Marker({
+                            position: { lat: data[i].Lat, lng: data[i].Long },
+                            map: map
+                        });
+                        contentString[i] = '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<div id="bodyContent">' +
+                            '<h3 id="firstHeading" class="firstHeading">' + data[i].FirstName + ' ' + data[i].LastName + '</h3> ' +
+                            '<p>' + data[i].Street + '</p>' +
+                            '<p>' + data[i].City + '</p>' +
+                            '<p>' + data[i].State + ' ' + data[i].ZipCode + '</p>';
+                        infowindow[i] = new google.maps.InfoWindow({
+                            content: contentString[i]
+                        });
+                        var markerValue = marker[i];
+                        google.maps.event.addListener(marker[i], 'mouseover', (function (markerValue, i) {
+                            return function () {
+                                infowindow[i].open(map, marker[i]);
+                            }
+                        })(marker[i], i));
+                        google.maps.event.addListener(marker[i], 'mouseout', (function (markerValue, i) {
+                            return function () {
+                                infowindow[i].close();
+                            }
+                        })(marker[i], i));
+                    }
+                })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&callback=initMap"
+            async defer></script>
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -29,29 +88,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PickupDay)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupDay)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

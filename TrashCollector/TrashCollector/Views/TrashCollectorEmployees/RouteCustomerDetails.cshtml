@@ -1,0 +1,178 @@
+﻿@model TrashCollector.Models.TrashCollectorCustomer
+
+@{
+    ViewBag.Title = "RouteCustomerDetails";
+}
+
+<h2>RouteCustomerDetails</h2>
+
+<style>
+    
+    #map {
+        height: 500px;
+        width: 100%
+    }
+</style>
+<br />
+<div class="jumbotron">
+    <div id="map"></div>
+
+    <script>
+        var map;
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 43.0343, lng: -87.9115 },
+                zoom: 12
+            });
+
+            $.get("@Url.Action("RouteCustomerOnMap", "TrashCollectorEmployees", new { id = Model.Id })", function (data, status) {
+                    var marker;
+                    var contentString;
+                    var infowindow;
+                marker = new google.maps.Marker({
+                    position: { lat: data.Lat, lng: data.Long },
+                    map: map
+                });
+                contentString = '<div id="content">' +
+                    '<div id="siteNotice">' +
+                    '</div>' +
+                    '<div id="bodyContent">' +
+                    '<h3 id="firstHeading" class="firstHeading">' + data.FirstName + ' ' + data.LastName + '</h3> ' +
+                    '<p>' + data.Street + '</p>' +
+                    '<p>' + data.City + '</p>' +
+                    '<p>' + data.State + ' ' + data.ZipCode + '</p>';
+                infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                var markerValue = marker;
+                marker.addListener('mouseover', function () {
+                    infowindow.open(marker.get('map'), marker);
+                });
+                marker.addListener('mouseout', function () {
+                    infowindow.close(marker.get('map'), marker);
+                });
+            })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ&callback=initMap"
+            async defer></script>
+</div>
+
+<div>
+    <h4>TrashCollectorCustomer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Long)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Long)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickupDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickupDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackupPickupDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackupPickupDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartPickupSuspension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartPickupSuspension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndPickupSuspension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndPickupSuspension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickupStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickupStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill)
+        </dd>
+
+    </dl>
+</div>

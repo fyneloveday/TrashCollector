@@ -30,8 +30,8 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
-        public float Lat { get; set; }
-        public float Long { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
         [Required]
         [Display(Name = "Pickup Day")]
         public PickupWeek PickupDay { get; set; }

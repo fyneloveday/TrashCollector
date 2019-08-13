@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -26,7 +27,6 @@ namespace TrashCollector.Controllers
         {
             var loggedInUser = User.Identity.GetUserId();
             var loggedCustomer = db.TrashCollectorCustomers.Where(l => l.AspUserId == loggedInUser).FirstOrDefault();
-            //var customer = db.TrashCollectorCustomers.FirstOrDefault();
             return View(loggedCustomer);
         }
 
@@ -48,6 +48,7 @@ namespace TrashCollector.Controllers
         // GET: TrashCollectorCustomers/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -56,20 +57,24 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(TrashCollectorCustomer trashCollectorCustomer)
+        public async Task <ActionResult> Create(TrashCollectorCustomer trashCollectorCustomer)
         {
-            trashCollectorCustomer = await SetLatLong(trashCollectorCustomer);
-            trashCollectorCustomer.AspUserId = User.Identity.GetUserId();
-
-            if (ModelState.IsValid)
+            try
             {
-                var getAspUser = User.Identity.GetUserId();
-                trashCollectorCustomer.AspUserId = getAspUser;
-                db.TrashCollectorCustomers.Add(trashCollectorCustomer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    trashCollectorCustomer.AspUserId = User.Identity.GetUserId();
+                    db.TrashCollectorCustomers.Add(trashCollectorCustomer);
+                    if (trashCollectorCustomer.Lat == 0)
+                    {
+                        trashCollectorCustomer = await SetLatLong(trashCollectorCustomer);
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(trashCollectorCustomer);
             }
-            else
+            catch
             {
                 return View(trashCollectorCustomer);
             }
@@ -100,9 +105,13 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(TrashCollectorCustomer trashCollectorCustomer)
         {
-            var customer = db.TrashCollectorCustomers.Single(m => m.Id == trashCollectorCustomer.Id);
+            var userId = User.Identity.GetUserId();
+            var customer = db.TrashCollectorCustomers.Where(m => m.AspUserId == userId).Single();
             customer.FirstName = trashCollectorCustomer.FirstName;
             customer.LastName = trashCollectorCustomer.LastName;
+            customer.Street = trashCollectorCustomer.Street;
+            customer.City = trashCollectorCustomer.City;
+            customer.State = trashCollectorCustomer.State;
             customer.ZipCode = trashCollectorCustomer.ZipCode;
             customer.PickupDay = trashCollectorCustomer.PickupDay;
             customer.BackupPickupDay = trashCollectorCustomer.BackupPickupDay;
@@ -113,6 +122,8 @@ namespace TrashCollector.Controllers
             {
                 customer = await SetLatLong(customer);
             }
+            db.SaveChanges();
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -162,11 +173,9 @@ namespace TrashCollector.Controllers
             stringBuilder.Append(customer.City.Replace(" ", "+"));
             stringBuilder.Append(";");
             stringBuilder.Append(customer.State.Replace(" ", "+"));
-            // example: string url = @"https://maps.googleapis.com/maps/api/geocode/json?address={stringBuilder.ToString()}1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDF3e3GTWiXubv6-LkNBxmGDUnQzoZlYzQ";
             string url = @"https://maps.googleapis.com/maps/api/geocode/json?address=" +
                     stringBuilder.ToString() + "&key=" + Models.Access.apiKey;
 
-            // httpclient
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = await request.GetResponseAsync();
@@ -177,12 +186,42 @@ namespace TrashCollector.Controllers
 
             var root = JsonConvert.DeserializeObject<ParishMapAPIData>(responseFromServer);
             var location = root.results[0].geometry.location;
-
+            
             customer.Lat = location.lat;
             customer.Long = location.lng;
             return customer;
+        }
 
+        [HttpGet]
+        public ActionResult PayFee()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult PayFee(string stripeToken)
+        {
+            try
+            {
+                StripeConfiguration.SetApiKey("sk_test_fILcvWEnilxMKhCgvbnUnCaP00zUfb2TwZ");
+                var options = new ChargeCreateOptions
+                {
+                    Amount = 200,
+                    Currency = "usd",
+                    Description = "Your Charge",
+                    Source = stripeToken // obtained with Stripe.js,
+
+                };
+                var service = new ChargeService();
+                Charge charge = service.Create(options);
+                var model = new ChargeViewModel();
+                model.ChargeId = charge.Id;
+                return View("PayStatus", model);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public class ParishMapAPIData
